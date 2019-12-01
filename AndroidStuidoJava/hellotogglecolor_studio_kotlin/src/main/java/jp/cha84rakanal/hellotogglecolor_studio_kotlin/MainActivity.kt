@@ -1,6 +1,7 @@
 package jp.cha84rakanal.hellotogglecolor_studio_kotlin
 
 import android.app.Activity
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -10,10 +11,13 @@ import android.view.View
 
 class MainActivity : Activity() {
 
+    private var mToggle = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val cLayout = ConstraintLayout(this)
+        cLayout.setBackgroundColor(Color.RED)
         val button = Button(this)
         cLayout.addView(button)
 
@@ -23,6 +27,8 @@ class MainActivity : Activity() {
 
         button.setOnClickListener {
             Log.v(MainActivity::class.java.simpleName, "onButtonClick")
+            mToggle = !mToggle
+            cLayout.setBackgroundColor(if(mToggle) Color.RED else Color.BLUE)
         }
 
         val constraintSet = ConstraintSet()
