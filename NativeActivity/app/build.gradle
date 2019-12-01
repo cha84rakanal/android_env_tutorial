@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
 
     defaultConfig {
-        applicationId = 'com.example.native_activity'
+        applicationId = 'jp.cha84rakanal.hellotogglecolor_studio_c_plusplus'
         minSdkVersion 14
         targetSdkVersion 28
         externalNativeBuild {
