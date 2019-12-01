@@ -2,6 +2,7 @@ package jp.cha84rakanal.hellotogglecolor_studio_kotlin
 
 import android.app.Activity
 import android.os.Bundle
+import android.util.Log
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import android.widget.Button
@@ -19,6 +20,10 @@ class MainActivity : Activity() {
         val viewId = View.generateViewId()
         button.id =  viewId
         button.text = "Hello World!"
+
+        button.setOnClickListener {
+            Log.v(MainActivity::class.java.simpleName, "onButtonClick")
+        }
 
         val constraintSet = ConstraintSet()
         constraintSet.clone(cLayout)
