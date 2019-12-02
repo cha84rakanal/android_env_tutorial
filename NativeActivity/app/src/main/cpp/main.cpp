@@ -65,6 +65,19 @@ struct engine {
     struct saved_state state;
 };
 
+void showUI(struct engine* engine) {
+    JNIEnv* jni;
+    engine->app->activity->vm->AttachCurrentThread(&jni, NULL);
+
+    // Default class retrieval
+    jclass clazz = jni->GetObjectClass(engine->app->activity->clazz);
+    jmethodID methodID = jni->GetMethodID(clazz, "showUI", "()V");
+    jni->CallVoidMethod(engine->app->activity->clazz, methodID);
+
+    engine->app->activity->vm->DetachCurrentThread();
+    return;
+}
+
 /**
  * Initialize an EGL context for the current display.
  */
@@ -153,6 +166,8 @@ static int engine_init_display(struct engine* engine) {
     glEnable(GL_CULL_FACE);
     glShadeModel(GL_SMOOTH);
     glDisable(GL_DEPTH_TEST);
+
+    showUI(engine);
 
     return 0;
 }
