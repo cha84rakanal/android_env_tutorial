@@ -17,6 +17,11 @@ public class MainActivity extends NativeActivity {
     MainActivity activity;
     PopupWindow popupWindow;
 
+    static {
+        System.loadLibrary("native-activity");
+    }
+    public native void toggle();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,11 @@ public class MainActivity extends NativeActivity {
                     = (LayoutInflater)getBaseContext()
                     .getSystemService(LAYOUT_INFLATER_SERVICE);
             View popupView = layoutInflater.inflate(R.layout.activity_main, null);
+
+            popupView.findViewById(R.id.button).setOnClickListener(v -> {
+                Log.e("java_code","ButtonClicked Called");
+                toggle();
+            });
 
             popupWindow = new PopupWindow(
                     popupView,

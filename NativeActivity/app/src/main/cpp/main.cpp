@@ -65,6 +65,15 @@ struct engine {
     struct saved_state state;
 };
 
+static int toggle_count = 0;
+
+extern "C"
+JNIEXPORT void JNICALL
+Java_jp_cha84rakanal_hellotogglecolor_1studio_1c_1plusplus_MainActivity_toggle(JNIEnv * env, jobject obj){
+    LOGW("called in native");
+    toggle_count++;
+}
+
 void showUI(struct engine* engine) {
     JNIEnv* jni;
     engine->app->activity->vm->AttachCurrentThread(&jni, NULL);
@@ -181,12 +190,14 @@ static void engine_draw_frame(struct engine* engine) {
         return;
     }
 
-    // Just fill the screen with a color.
-    glClearColor(
-            (sin(engine->state.angle*PI/180)+1.0)/2.0,
-            (cos(engine->state.angle*PI/180)+1.0)/2.0,
-            (sin(engine->state.angle*PI*2/180)+1.0)/2.0,
-            1);
+    if(toggle_count%2 == 0){
+        // Just fill the screen with a color.
+        glClearColor(1,0,0,1);
+    }else{
+        glClearColor(0,0,1,1);
+    }
+
+
     glClear(GL_COLOR_BUFFER_BIT);
 
     eglSwapBuffers(engine->display, engine->surface);
@@ -351,6 +362,7 @@ void android_main(struct android_app* state) {
     }
 
     // loop waiting for stuff to do.
+    engine.animating = 1;
 
     while (1) {
         // Read all pending events.
@@ -389,17 +401,17 @@ void android_main(struct android_app* state) {
             }
         }
 
-        if (engine.animating) {
+        //if (engine.animating) {
             // Done with events; draw next animation frame.
-            engine.state.angle += 1.0f;
-            if (engine.state.angle > 360) {
-                engine.state.angle = 0;
-            }
+            //engine.state.angle += 1.0f;
+            //if (engine.state.angle > 360) {
+            //    engine.state.angle = 0;
+            //}
 
             // Drawing is throttled to the screen update rate, so there
             // is no need to do timing here.
             engine_draw_frame(&engine);
-        }
+        //}
     }
 }
 //END_INCLUDE(all)
