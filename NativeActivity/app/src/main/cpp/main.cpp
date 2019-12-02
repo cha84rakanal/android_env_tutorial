@@ -27,6 +27,9 @@
 #include <EGL/egl.h>
 #include <GLES/gl.h>
 
+#include <math.h>
+#define PI 3.1415926
+
 #include <android/sensor.h>
 #include <android/log.h>
 #include <android_native_app_glue.h>
@@ -164,8 +167,11 @@ static void engine_draw_frame(struct engine* engine) {
     }
 
     // Just fill the screen with a color.
-    glClearColor(((float)engine->state.x)/engine->width, engine->state.angle,
-                 ((float)engine->state.y)/engine->height, 1);
+    glClearColor(
+            (sin(engine->state.angle*PI/180)+1.0)/2.0,
+            (cos(engine->state.angle*PI/180)+1.0)/2.0,
+            (sin(engine->state.angle*PI*2/180)+1.0)/2.0,
+            1);
     glClear(GL_COLOR_BUFFER_BIT);
 
     eglSwapBuffers(engine->display, engine->surface);
@@ -354,9 +360,9 @@ void android_main(struct android_app* state) {
                     ASensorEvent event;
                     while (ASensorEventQueue_getEvents(engine.sensorEventQueue,
                                                        &event, 1) > 0) {
-                        LOGI("accelerometer: x=%f y=%f z=%f",
-                             event.acceleration.x, event.acceleration.y,
-                             event.acceleration.z);
+                        //LOGI("accelerometer: x=%f y=%f z=%f",
+                        //     event.acceleration.x, event.acceleration.y,
+                        //     event.acceleration.z);
                     }
                 }
             }
@@ -370,8 +376,8 @@ void android_main(struct android_app* state) {
 
         if (engine.animating) {
             // Done with events; draw next animation frame.
-            engine.state.angle += .01f;
-            if (engine.state.angle > 1) {
+            engine.state.angle += 1.0f;
+            if (engine.state.angle > 360) {
                 engine.state.angle = 0;
             }
 
