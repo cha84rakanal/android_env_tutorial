@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxAndroid.h"
+#include <jni.h>
 
 class ofApp : public ofxAndroidApp{
 	

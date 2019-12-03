@@ -2,15 +2,25 @@ package cc.openframeworks.HelloColorToggle;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+
 import cc.openframeworks.OFAndroid;
 
 
 public class OFActivity extends cc.openframeworks.OFActivity{
 
+    public native void click();
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                click();
+            }
+        });
     }
 
     @Override

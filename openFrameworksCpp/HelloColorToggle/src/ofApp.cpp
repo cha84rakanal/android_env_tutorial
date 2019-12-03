@@ -1,5 +1,11 @@
 #include "ofApp.h"
 
+extern "C"
+JNIEXPORT void JNICALL
+Java_cc_openframeworks_HelloColorToggle_OFActivity_click(JNIEnv* env,jobject thiz){
+    ofBackground(255,255,255);
+}
+
 //--------------------------------------------------------------
 void ofApp::setup(){
 
