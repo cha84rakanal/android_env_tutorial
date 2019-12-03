@@ -1,0 +1,4 @@
+platforms/*
+!platforms/platforms.json
+plugins
+node_modules/*
