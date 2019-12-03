@@ -1,14 +1,17 @@
 #include "ofApp.h"
 
+static bool toggle;
+
 extern "C"
 JNIEXPORT void JNICALL
 Java_cc_openframeworks_HelloColorToggle_OFActivity_click(JNIEnv* env,jobject thiz){
-    ofBackground(255,255,255);
+    toggle = !toggle;
 }
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
+    toggle = true;
+    ofBackground(255,0,0);
 }
 
 //--------------------------------------------------------------
@@ -18,7 +21,10 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
+    if(toggle)
+        ofBackground(255,0,0);
+    else
+        ofBackground(0,0,255);
 }
 
 //--------------------------------------------------------------
