@@ -17,9 +17,21 @@
  * under the License.
  */
 var app = {
+
+    toggle: false,
+
     // Application Constructor
     initialize: function() {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+
+        document.getElementById('back').style.backgroundColor = 'red';
+        document.getElementById('button1').addEventListener('click',()=>{
+
+            document.getElementById('back').style.backgroundColor = (this.toggle)? 'red' : 'blue';
+            this.toggle = !this.toggle;
+            console.log('click');
+
+        });
     },
 
     // deviceready Event Handler
