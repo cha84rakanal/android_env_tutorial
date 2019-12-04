@@ -7,7 +7,7 @@ namespace HelloToggleColor.Droid
     [Activity(Label = "HelloToggleColor", MainLauncher = true, Icon = "@mipmap/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
+        private bool toggle = true;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -20,7 +20,11 @@ namespace HelloToggleColor.Droid
             // and attach an event to it
             Button button = FindViewById<Button>(Resource.Id.myButton);
 
-            button.Click += delegate { button.Text = $"{count++} clicks!"; };
+            button.Click += delegate {
+                Android.Util.Log.Info("Xamarine","onClick");
+                ((RelativeLayout)button.Parent).SetBackgroundColor((toggle)?Android.Graphics.Color.Red : Android.Graphics.Color.Blue);
+                toggle = !toggle;
+            };
         }
     }
 }
