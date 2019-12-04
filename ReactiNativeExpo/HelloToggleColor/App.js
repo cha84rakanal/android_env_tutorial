@@ -1,10 +1,15 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, Button,View } from 'react-native';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Button
+          onPress={this.onPressLearnMore}
+          title="Learn More"
+          color="#858585"
+          accessibilityLabel="Learn more about this purple button"
+      />
     </View>
   );
 }
