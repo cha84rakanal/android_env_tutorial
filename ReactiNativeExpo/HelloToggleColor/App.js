@@ -1,7 +1,12 @@
 import React from 'react';
-import { StyleSheet, Text, Button,View } from 'react-native';
+import { StyleSheet, Text, Button, View, Alert} from 'react-native';
 
 export default function App() {
+
+  onPressLearnMore = () =>{
+    Alert.alert('pressed button')
+  };
+
   return (
     <View style={styles.container}>
       <Button
