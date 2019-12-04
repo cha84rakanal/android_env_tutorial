@@ -13,9 +13,19 @@ namespace HelloToggleColor
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+
+        private bool toggle = true;
+
         public MainPage()
         {
             InitializeComponent();
+        }
+
+        void OnButtonClicked(object sender, EventArgs args)
+        {
+            Console.WriteLine("DEBUG - Button Clicked!");
+            layout.BackgroundColor = toggle ? Color.Red : Color.Blue;
+            toggle = !toggle;
         }
     }
 }
